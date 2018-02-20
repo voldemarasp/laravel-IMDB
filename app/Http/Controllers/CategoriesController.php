@@ -14,20 +14,23 @@ class CategoriesController extends Controller
 		return view('categories.addCategorieForm');
 	}
 
-    public function add () {
+    public function add (Request $request) {
 
-    	$name = $_POST['name'];
-    	$description = $_POST['description'];
+    	$name = $request->input('name');
+    	$description = $request->input('description');
     	$user_id = Auth::User()->id;
 
-    	$posts = Categories::insert(['name' => $name, 'description' => $description, 'user_id' => $user_id]);
+    	$posts = Categories::create(['name' => $name, 'description' => $description, 'user_id' => $user_id]);
 
-    	return view('categories.addCategorieForm');
+    	return redirect()->route('displayCategory');
     }
 
     public function display () {
+
     	$cats = Categories::get();
 
     	return view('categories.showCategories', ['cats' => $cats]);
     }
 }
+
+

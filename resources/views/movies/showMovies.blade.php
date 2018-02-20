@@ -1,4 +1,6 @@
-@include('partials/header')
+@extends('layouts.app')
+@section('content')
+
 <div class="container">
 	<div class="row">
 		<div class="col mt-5">
@@ -9,17 +11,17 @@
 		
 @foreach ($movies as $movie)
 <div class="col-4 mt-5">
+@foreach ($movie->images as $image)
+<img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px'>
+@endforeach
 <h3>{{ $movie->name }}</h3>
-<p>{{ $movie->description }}</p>
-<p>{{ $movie->category->name}}</p>
-<p>{{ $movie->user->name }}</p>
-<p>{{ $movie->year }}</p>
-<p>{{ $movie->description }}</p>
-<p>{{ $movie->rating }}</p>
-<p>{{ $movie->date }}</p>
+<p class="text-justify">{{ $movie->description }}</p>
+<p>Kategorija: <strong>{{ $movie->category->name}}</strong></p>
+<p>Sukurta: <storng>{{ $movie->date }}</storng></p>
 </div>
 @endforeach
 
 </div>
 </div>
-@include('partials/footer')
+
+@endsection

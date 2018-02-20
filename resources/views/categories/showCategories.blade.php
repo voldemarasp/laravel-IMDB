@@ -1,4 +1,6 @@
-@include('partials/header')
+@extends('layouts.app')
+@section('content')
+
 <div class="container">
 	<div class="row">
 		<div class="col mt-5">
@@ -16,4 +18,5 @@
 </div>
 </div>
 </div>
-@include('partials/footer')
+
+@endsection

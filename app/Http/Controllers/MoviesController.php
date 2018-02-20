@@ -22,30 +22,23 @@ class MoviesController extends Controller
     	$user_id = Auth::User()->id;
 
     	$file = $request->file('photo');
-    	$path = $file->storePublicly('photo');
+    	$path = $file->storePublicly('public/photo');
     	$filename = basename($path);
 
 
-    	$name = $_POST['name'];
-    	$category_id = $_POST['category_id'];
+    	$name = $request->input('name');
+    	$category_id = $request->input('category_id');
     	$user_id = Auth::User()->id;
-    	$year = $_POST['year'];
-    	$description = $_POST['description'];
-    	$rating = $_POST['rating'];
+    	$year = $request->input('year');
+    	$description = $request->input('description');
+    	$rating = $request->input('rating');
 		$date = date('Y-m-d');
 
-    	$posts = Movies::insert(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
+    	$moviesAdd = Movies::create(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
+    	
+    	$moviesAdd->images()->create(['filename' => $filename, 'user_id' => $user_id]);
 
-
-    	$getMovie_id = Movies::orderBy('id', 'desc')->limit(1)->get();
-		$movie_id = $getMovie_id[0]->id;
-
-
-    	$images = Images::insert(['filename' => $filename, 'user_id' => $user_id, 'imageable_id' => $movie_id]);
-
-    	$movies = Movies::get();
-
-    	return view('movies.showMovies', ['movies' => $movies]);
+    	return redirect()->route('displayMovies');
     }
 
     public function display () {
