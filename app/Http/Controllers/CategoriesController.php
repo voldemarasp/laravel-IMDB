@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Categories;
 use Auth;
+use App\Movies;
 
 class CategoriesController extends Controller
 {
@@ -31,6 +32,13 @@ class CategoriesController extends Controller
 
     	return view('categories.showCategories', ['cats' => $cats]);
     }
-}
+
+    public function displayCat ($id) {
+    	$movies = Movies::where('category_id', $id)->get();
+    	return view('movies.showMovies', ['movies' => $movies]);
+    }
+
+
+    }
 
 

@@ -22,4 +22,9 @@ class Movies extends Model
     public function images() {
     return $this->morphMany(Images::class, 'imageable');
 	}
+
+	public function actors() {
+		return $this->belongsToMany(Actor::class, 'actor_movie', 'movie_id', 'actor_id');
+	}
+
 }

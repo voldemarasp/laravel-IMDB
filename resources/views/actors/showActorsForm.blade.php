@@ -10,7 +10,7 @@
 	{{ csrf_field() }}
 	<input class="form-control mt-3" type="text" name="name" id="name" placeholder="Name">
 
-	 <select class="form-control mt-3" name="category_id" id="category_id">
+	 <select class="form-control mt-3" name="movie_id[]" id="movie_id" multiple="multiple">
 	 	@foreach ($movies as $movie)
 	  <option value="{{ $movie->id }}">{{ $movie->name }}</option>
 	  @endforeach

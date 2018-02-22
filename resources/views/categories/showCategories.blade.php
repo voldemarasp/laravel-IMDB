@@ -9,9 +9,10 @@
 	</div>
 	<div class="row">
 		<div class="col mt-5">
+
 @foreach ($cats as $cat)
 
-<h3>{{ $cat->name }}</h3>
+<h3><a href="cats/{{ $cat->id }}">{{ $cat->name }} ({{ $cat->movies->count() }})</a></h3>
 <p>{{ $cat->description }}</p>
 
 @endforeach

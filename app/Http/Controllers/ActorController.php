@@ -21,6 +21,7 @@ class ActorController extends Controller
 			$birthday = $request->input('birthday');
 			$deathday = $request->input('deathday');
 			$user_id = Auth::User()->id;
+			$movie_id = $request->input('movie_id');
 
 			$file = $request->file('photo');
 		    $path = $file->storePublicly('public/photo');
@@ -28,7 +29,9 @@ class ActorController extends Controller
 
 			$addActors = Actor::create(['name' => $name, 'bithday' => $birthday, 'deathday' => $deathday, 'user_id' => $user_id]);
 			$addActors->images()->create(['filename' => $filename, 'user_id' => $user_id]);
-
+        	if (isset($movie_id)) {		
+        	$addActors->movies()->attach($movie_id);	
+        	}
 			return redirect()->route('displayActors');
 
 		}

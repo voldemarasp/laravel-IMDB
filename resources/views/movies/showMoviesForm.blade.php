@@ -9,6 +9,13 @@
 <form method="POST" action="/addMovie" enctype="multipart/form-data">
 	{{ csrf_field() }}
 	<input class="form-control mt-3" type="text" name="name" id="name" placeholder="Name">
+
+	<select class="form-control mt-3" name="actor_id[]" id="actor_id" multiple="multiple">
+	@foreach ($actors as $actor)
+	<option value="{{ $actor->id }}">{{ $actor->name }}</option>
+	@endforeach
+	</select> 
+
 	 <select class="form-control mt-3" name="category_id" id="category_id">
 	 @foreach ($cats as $cat)
 	  <option value="{{ $cat->id }}">{{ $cat->name }}</option>

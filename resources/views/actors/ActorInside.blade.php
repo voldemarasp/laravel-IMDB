@@ -17,6 +17,11 @@
 	<h3>{{ $actor->name }}</h3>
 	<p>Birthday: {{ $actor->bithday }}</p>
 	<p>Deathday: {{ $actor->deathday }}</p>
+	<p>Movies:
+	@foreach ($actor->movies as $movie)
+	<a href="{{ URL::asset('movies/'.$movie->id) }}"> {{ $movie->name }}</a>, 
+	@endforeach
+	</p>
 </div>
 @endforeach
 

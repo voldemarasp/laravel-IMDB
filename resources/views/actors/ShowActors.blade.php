@@ -10,13 +10,17 @@
 	<div class="row">
 		
 @foreach ($actors as $actor)
-<div class="col-3">
+<div class="col-4 mt-5 shadow mx-3 no-gutters">
 	@foreach ($actor->images as $image)
-<img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px;'>
+	<div class="movie-image">
+<img src="{{ URL::asset('storage/photo/'.$image->filename) }}">
+</div>
   	@endforeach
-	<h3><a href="/actor/{{ $actor->id }}">{{ $actor->name }}</a></h3>
+  	<div class="pl-3 pt-3 pr-3">
+	<h3><a href="/actors/{{ $actor->id }}">{{ $actor->name }}</a></h3>
 	<p>Birthday: {{ $actor->bithday }}</p>
 	<p>Deathday: {{ $actor->deathday }}</p>
+</div>
 </div>
 @endforeach
 

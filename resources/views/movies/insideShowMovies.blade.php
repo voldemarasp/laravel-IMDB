@@ -8,20 +8,22 @@
 		</div>
 	</div>
 	<div class="row">
-
+		
 @foreach ($movies as $movie)
-<div class="col-4 mt-5 shadow mx-3 no-gutters">
+<div class="col-4 mt-5">
 @foreach ($movie->images as $image)
-<div class="movie-image">
-<img src="{{ URL::asset('storage/photo/'.$image->filename) }}">
-</div>
+<img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px'>
 @endforeach
-<div class="pl-3 pt-3 pr-3">
-<h3><a href="movies/{{$movie->id}} "> {{ $movie->name }}</a></h3>
+<h3>{{ $movie->name }}</h3>
 <p class="text-justify">{{ $movie->description }}</p>
 <p>Kategorija: <strong>{{ $movie->category->name}}</strong></p>
 <p>Sukurta: <storng>{{ $movie->date }}</storng></p>
-</div>
+<p>Actors:
+@foreach ($movie->actors as $actors)
+<a href="{{ URL::asset('actors/'.$actors->id) }}"> {{ $actors->name }}</a> ,
+@endforeach
+</p>
+
 </div>
 @endforeach
 

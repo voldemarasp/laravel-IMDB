@@ -9,12 +9,14 @@ use App\Categories;
 use Auth;
 use App\Http\Requests\AddMovie;
 use App\Images;
+use App\Actor;
 
 class MoviesController extends Controller
 {
 	public function form () {
 		$cats = Categories::get();
-		return view('movies.showMoviesForm', ['cats' => $cats]);
+		$actors = Actor::get();
+		return view('movies.showMoviesForm', ['cats' => $cats, 'actors' => $actors]);
 	}
 
     public function add (AddMovie $request) {
@@ -33,11 +35,14 @@ class MoviesController extends Controller
     	$description = $request->input('description');
     	$rating = $request->input('rating');
 		$date = date('Y-m-d');
+		$actor_id = $request->input('actor_id');
 
     	$moviesAdd = Movies::create(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
     	
     	$moviesAdd->images()->create(['filename' => $filename, 'user_id' => $user_id]);
-
+    	if (isset($actor_id)) {
+    	$moviesAdd->actors()->attach($actor_id);
+    	}
     	return redirect()->route('displayMovies');
     }
 
@@ -46,5 +51,12 @@ class MoviesController extends Controller
     	$movies = Movies::get();
 
     	return view('movies.showMovies', ['movies' => $movies]);
+    }
+
+
+    public function inside($id) {
+		$movies = Movies::where('id', $id)->get();
+		return view('movies.insideShowMovies', ['movies' => $movies]);
+
     }
 }
