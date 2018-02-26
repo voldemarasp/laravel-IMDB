@@ -13,4 +13,8 @@ class ActorMovie extends Model
 	public function actorBelongs() {
 		return $this->morphMany(Actor::class);
 	}
+
+	public function movieBelongs() {
+		return $this->morphMany(Movies::class);
+	}
 }

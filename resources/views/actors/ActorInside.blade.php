@@ -15,6 +15,10 @@
 <img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px;'>
   	@endforeach
 	<h3>{{ $actor->name }}</h3>
+	<p>
+		<a href="/editActor/{{ $actor->id }}">Edit</a>
+		<a href="/deleteActor/{{ $actor->id }}">Delete</a>
+	</p>
 	<p>Birthday: {{ $actor->bithday }}</p>
 	<p>Deathday: {{ $actor->deathday }}</p>
 	<p>Movies:

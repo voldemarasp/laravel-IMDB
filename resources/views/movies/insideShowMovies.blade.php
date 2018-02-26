@@ -14,10 +14,14 @@
 @foreach ($movie->images as $image)
 <img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px'>
 @endforeach
-<h3>{{ $movie->name }}</h3>
+<h3>{{ $movie->name }}</h3> 
+<p>
+<a href="/editMovie/{{ $movie->id }}">Edit</a>
+<a href="/deleteMovie/{{ $movie->id }}">Delete</a>
+</p>
 <p class="text-justify">{{ $movie->description }}</p>
 <p>Kategorija: <strong>{{ $movie->category->name}}</strong></p>
-<p>Sukurta: <storng>{{ $movie->date }}</storng></p>
+<p>Sukurta: <strong>{{ $movie->date }}</strong></p>
 <p>Actors:
 @foreach ($movie->actors as $actors)
 <a href="{{ URL::asset('actors/'.$actors->id) }}"> {{ $actors->name }}</a> ,

@@ -18,7 +18,7 @@
 @endforeach
 <div class="pl-3 pt-3 pr-3">
 <h3><a href="movies/{{$movie->id}} "> {{ $movie->name }}</a></h3>
-<p class="text-justify">{{ $movie->description }}</p>
+<p class="text-justify">{{ str_limit($movie->description, 100) }}</p>
 <p>Kategorija: <strong>{{ $movie->category->name}}</strong></p>
 <p>Sukurta: <storng>{{ $movie->date }}</storng></p>
 </div>
