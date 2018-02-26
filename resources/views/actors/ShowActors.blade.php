@@ -12,8 +12,13 @@
 @foreach ($actors as $actor)
 <div class="col-4 mt-5 shadow mx-3 no-gutters">
 	@foreach ($actor->images as $image)
+	@php dd($image); @endphp
 	<div class="movie-image">
-<img src="{{ URL::asset('storage/photo/'.$image->filename) }}">
+@if (isset($image[0]->filename))
+<img src="{{ URL::asset('storage/photo/'.$image[0]->filename) }}" width='100%';>
+@else
+<img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
+@endif
 </div>
   	@endforeach
   	<div class="pl-3 pt-3 pr-3">

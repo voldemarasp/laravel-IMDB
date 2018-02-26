@@ -46,7 +46,7 @@ class ActorController extends Controller
 		}
 
 		public function inside($id) {
-			$actors = Actor::where('id', $id)->get();
+			$actors = Actor::findOrFail($id);
 			return view('actors.ActorInside', ['actors' => $actors]);
 		}
 
@@ -64,22 +64,25 @@ class ActorController extends Controller
 			$user_id = Auth::User()->id;
 			$movie_id = $request->input('movie_id');
 
-			if (null !== $request->file('photo')) {
-
-			$file = $request->file('photo');
-		    $path = $file->storePublicly('public/photo');
-		    $filename = basename($path);
-
-			$addActors = Actor::findOrFail($id);
-			
-
-			$fullImagesPath = $addActors->images()->where('imageable_id', $id)->get();
-			$fullPathImg = 'public/photo/' . $fullImagesPath[0]->filename;
+	    	if (null !== $request->file('photo')) {
+			$actorAdd = Actor::findOrFail($id);
+			$fullImagesPath = $actorAdd->images()->where('imageable_id', $id)->get();
+			foreach ($fullImagesPath as $fullOnePath) {
+			$fullPathImg = 'public/photo/' . $fullOnePath->filename;
 			Storage::delete($fullPathImg);
-
-			$addActors->images()->update(['filename' => $filename, 'user_id' => $user_id]);
-
 			}
+
+	    	$file = $request->file('photo');
+	    	
+	    	$actorAdd->images()->where('imageable_id', $id)->delete();
+	    	foreach ($file as $oneFile) {
+	    	$path = $oneFile->storePublicly('public/photo');
+	    	$filename = basename($path);
+	    	
+	    	$actorAdd->images()->where('imageable_id', $id)->create(['filename' => $filename, 'user_id' => $user_id]);
+
+	    	}
+	    	}
 
 			$addActors = Actor::where('id', $id)->update(['name' => $name, 'bithday' => $birthday, 'deathday' => $deathday, 'user_id' => $user_id]);
 

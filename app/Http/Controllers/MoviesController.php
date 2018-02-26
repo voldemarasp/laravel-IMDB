@@ -42,6 +42,7 @@ class MoviesController extends Controller
     	$moviesAdd = Movies::create(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
     	
     	$moviesAdd->images()->create(['filename' => $filename, 'user_id' => $user_id]);
+
     	if (isset($actor_id)) {
     	$moviesAdd->actors()->attach($actor_id);
     	}
@@ -84,25 +85,31 @@ class MoviesController extends Controller
     	$moviesAdd = Movies::where('id', $id)->update(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
     	
     	if (null !== $request->file('photo')) {
-    	$file = $request->file('photo');
-    	$path = $file->storePublicly('public/photo');
-    	$filename = basename($path);
-    	$moviesAdd = Movies::findOrFail($id);
-
+		$moviesAdd = Movies::findOrFail($id);
 		$fullImagesPath = $moviesAdd->images()->where('imageable_id', $id)->get();
-		$fullPathImg = 'public/photo/' . $fullImagesPath[0]->filename;
+		foreach ($fullImagesPath as $fullOnePath) {
+		$fullPathImg = 'public/photo/' . $fullOnePath->filename;
 		Storage::delete($fullPathImg);
+		}
 
-    	$moviesAdd->images()->where('imageable_id', $id)->update(['filename' => $filename, 'user_id' => $user_id]);
-
+    	$file = $request->file('photo');
     	
+    	$moviesAdd->images()->where('imageable_id', $id)->delete();
+    	foreach ($file as $oneFile) {
+    	$path = $oneFile->storePublicly('public/photo');
+    	$filename = basename($path);
+    	
+    	$moviesAdd->images()->where('imageable_id', $id)->create(['filename' => $filename, 'user_id' => $user_id]);
+
+    	}
     	}
 
     	if (isset($actor_id)) {
+    	$moviesAdd->actors()->detach();
     	$moviesAdd->actors()->attach($actor_id);
     	}
 
-    	return redirect()->route('displayActors');
+    	return redirect()->route('displayMovies');
 
     }
 

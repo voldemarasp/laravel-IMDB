@@ -14,8 +14,10 @@
 	
 
 
-		@if ($movies->actors->contains($actor)) <option value="{{ $actor->id }}" selected="seleted">{{ $actor->name }}</option>
-		@else <option value="{{ $actor->id }}">{{ $actor->name }}</option>
+		@if ($movies->actors->contains($actor)) 
+		<option value="{{ $actor->id }}" selected="seleted">{{ $actor->name }}</option>
+		@else 
+		<option value="{{ $actor->id }}">{{ $actor->name }}</option>
 		@endif
 
 
@@ -32,10 +34,12 @@
 	<textarea class="form-control mt-3" name="description" id="description">{{ $movies->description }}</textarea>
 	<input class="form-control mt-3" type="text" name="rating" id="rating" placeholder="Rating" value="{{ $movies->rating }}">
 	<h3 class="mt-3">Featured photo</h3>
-	@if (!empty($movies->images[0]))
-	<img src="{{ URL::asset('storage/photo/'.$movies->images[0]->filename) }}" height="50px">
+	@if (!empty($movies->images))
+	@foreach ($movies->images as $image)
+	<img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height="50px">
+	@endforeach
 	@endif
-	<input multiple="multiple" class="form-control mt-3" type="file" name="photo" id="photo">
+	<input multiple="multiple" class="form-control mt-3" type="file" name="photo[]" id="photo">
 	<input class="form-control btn-success mt-3" type="submit" name="submit" value="Submit">
 </form>
 
