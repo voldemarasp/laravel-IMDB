@@ -51,10 +51,20 @@ class MoviesController extends Controller
     }
 
     public function display () {
-    	
-    	$movies = Movies::get();
-    	$actors = Actor::get();
-    	return view('movies.showMovies', ['movies' => $movies, 'actors' => $actors]);
+    	$mov = Movies::get();
+
+// $path = 'http://api.themoviedb.org/3/movie/top_rated?api_key=3d666046197bc35f402080e836eaaa66';
+// $json = json_decode(file_get_contents($path), true); 
+$path = 'https://api.themoviedb.org/3/movie/'. $mov[0]->id .'/credits?api_key=3d666046197bc35f402080e836eaaa66';
+$json = json_decode(file_get_contents($path), true);
+
+dd($json);
+
+    	$images = Images::take(10)->get();
+		$actors = Actor::get();
+		$movies = Movies::paginate(10);
+		$cats = Categories::get();
+    	return view('movies.showMovies', ['movies' => $movies, 'actors' => $actors, 'cats' => $cats, 'images' => $images, 'json' => $json['results']]);
     }
 
 
@@ -132,5 +142,34 @@ class MoviesController extends Controller
     	$movies->images()->delete();
 
     	return redirect()->route('displayMovies');
+    }
+
+    public function apisingle($id) {
+
+    	$movies = Movies::get();
+
+    	foreach ($movies as $movie) {
+
+$path = 'https://api.themoviedb.org/3/movie/'. $movie->id .'/credits?api_key=3d666046197bc35f402080e836eaaa66';
+$json = json_decode(file_get_contents($path), true);
+
+
+
+        foreach ($json['cast'] as $seedas) {
+        dd($seedas['id']);        
+		$actorPath = 'https://api.themoviedb.org/3/person/'. $seedas['id'] .'?api_key=3d666046197bc35f402080e836eaaa66';
+        $actorJson = json_decode(file_get_contents($actorPath), true);
+
+        $year = substr($seedas['release_date'], 0, 4);
+        DB::table('actors')->insert([
+        'id' => $seedas['id'],
+    	'name' => $actorJson['name'],
+    	'bithday' => $actorJson['birthday'],
+    	'deathday' => $actorJson['deathday'],
+    	'user_id' => '2',
+        ]);
+        }
+    }
+
     }
 }

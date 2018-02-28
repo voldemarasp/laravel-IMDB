@@ -11,21 +11,25 @@ class MoviesSeeder extends Seeder
      */
     public function run()
     {
-            DB::table('comments')->insert([
-        	'name' => 'My first movie',
-        	'category_id' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat blanditiis sequi nihil voluptate eos cumque assumenda excepturi vitae quos officiis recusandae error quo nulla dolorum doloremque sed, repudiandae est,',
-        	'date' => '2018-02-14',
-        	'post_id' => '1'
-        ]);
+
+            $path = 'http://api.themoviedb.org/3/movie/top_rated?api_key=3d666046197bc35f402080e836eaaa66';
+
+            $json = json_decode(file_get_contents($path), true);
+
+
+
+            foreach ($json['results'] as $seedas) {
+            $year = substr($seedas['release_date'], 0, 4);
+            DB::table('movies')->insert([
+            'id' => $seedas['id'],
+        	'name' => $seedas['title'],
+        	'category_id' => $seedas['genre_ids'][0],
+        	'year' => $year,
+        	'user_id' => '2',
+            'description' => $seedas['overview'],
+            'rating' => $seedas['vote_average'],
+            'date' => ''
+            ]);
+            }
     }
 }
-
-            $movies->increments('id');
-            $movies->string('name', 255);
-            $movies->unsignedInteger('category_id');
-            $movies->unsignedInteger('user_id');
-            $movies->integer('year');
-            $movies->text('description');
-            $movies->double('rating');
-            $movies->unsignedInteger('date');
-            $movies->timestamps();

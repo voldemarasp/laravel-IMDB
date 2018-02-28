@@ -13,11 +13,13 @@
 @endif
 <div class="pl-3 pt-3 pr-3">
 <h3 class="mt-3">{{ $actors->name }}</h3> 
+@auth
 <hr>
 	<p>
 		<a href="/editActor/{{ $actors->id }}">Edit</a>
 		<a href="/deleteActor/{{ $actors->id }}">Delete</a>
 	</p>
+@endauth
 <hr>
 	<p>Birthday: {{ $actors->bithday }}</p>
 <hr>

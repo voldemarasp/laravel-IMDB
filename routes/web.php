@@ -22,7 +22,7 @@ Route::get('/cats/{id}', 'CategoriesController@displayCat')->name('displayCat');
 
 Route::get('/displayMovies', 'MoviesController@display')->name('displayMovies');
 Route::get('/movies/{id}', 'MoviesController@inside')->name('insideMovies');
-
+Route::get('/apimovies/{id}', 'MoviesController@apisingle')->name('apimovies');
 
 
 

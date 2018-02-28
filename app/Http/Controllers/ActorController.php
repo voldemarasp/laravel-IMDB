@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Actor;
 use App\Movies;
 use App\Categories;
+use App\Images;
 use App\Http\Requests\Actors;
 use App\Http\Requests\StoreActor;
 use Auth;
@@ -46,11 +47,11 @@ class ActorController extends Controller
 		}
 
 		public function display() {
-
+			$images = Images::take(10)->get();
 			$actors = Actor::get();
 			$movies = Movies::get();
 			$cats = Categories::get();
-			return view('actors.showActors', ['actors' => $actors, 'movies' => $movies, 'cats' => $cats]);
+			return view('actors.showActors', ['actors' => $actors, 'movies' => $movies, 'cats' => $cats, 'images' => $images]);
 
 		}
 

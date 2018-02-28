@@ -14,10 +14,12 @@
 @endif
 <div class="pl-3 pt-3 pr-3">
 <h3 class="mt-3">{{ $movie->name }}</h3> 
+@auth
 <hr>
 <p>
 <a href="/editMovie/{{ $movie->id }}">Edit</a>
 <a href="/deleteMovie/{{ $movie->id }}">Delete</a>
+@endauth
 </p>
 <hr>
 <p class="text-justify">{{ $movie->description }}</p>

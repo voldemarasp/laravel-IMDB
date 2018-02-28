@@ -46,6 +46,15 @@
 <li><a href="{{ url('/cats') }}/{{ $cat->id }}">{{ $cat->name }} ({{ $cat->movies->count() }})</a></li>
 @endforeach
 </ul>
+<hr>
+<h3>Latest images</h3>
+<div class="row">
+@foreach ($images as $image)
+<div class="col-6 sidebar-images mt-3">
+<img src="{{ URL::asset('storage/photo/'.$image->filename) }}">
+</div>
+@endforeach
+</div>
 </div>
 </div>
 </div>

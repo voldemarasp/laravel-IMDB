@@ -114,3 +114,21 @@ max-width:calc(33.33% - 60px) !important;
 .fb-login {
     text-align: center;
 }
+
+.footer {
+    background-color: black;
+    color:white;
+    height:50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar-images {
+    height: 55px;
+    overflow: hidden;
+}
+
+.sidebar-images img {
+    object-fit: cover;
+    height:75px;
+}
