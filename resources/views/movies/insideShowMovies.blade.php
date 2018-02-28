@@ -7,7 +7,11 @@
 @foreach ($movies as $movie)
 <div class="col-4 mt-5 movies-inside-border no-gutters">
 
+@if (isset($movie->images[0]->filename))
 <img src="{{ URL::asset('storage/photo/'.$movie->images[0]->filename) }}" width='100%';>
+@else
+<img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
+@endif
 <div class="pl-3 pt-3 pr-3">
 <h3 class="mt-3">{{ $movie->name }}</h3> 
 <hr>
@@ -37,7 +41,7 @@
 
 @foreach ($movie->images as $image)
 
-<div class="col-4 movie-image-inside">
+<div class="col-4 movie-image-inside mt-3">
 <img class="shadow-images" src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px' width='100%;'>
 </div>
 

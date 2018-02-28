@@ -20,8 +20,10 @@
 	<input class="form-control mt-3" type="date" name="deathday" id="deathday" placeholder="Death year" value="{{ $actors->deathday }}">
 	
 	<h3>Featured Image</h3>
-	<img src="{{ URL::asset('storage/photo/'.$actors->images[0]->filename) }}" height="60px">
-	<input multiple="multiple" class="form-control mt-3" type="file" name="photo" id="photo">
+	@foreach ($actors->images as $image)
+	<img src="{{ URL::asset('storage/photo/'.$image->filename) }}" height="60px">
+	@endforeach
+	<input multiple="multiple" class="form-control mt-3" type="file" name="photo[]" id="photo">
 
 	<input class="form-control btn-success mt-3" type="submit" name="submit" value="Submit">
 </form>

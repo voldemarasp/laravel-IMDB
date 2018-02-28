@@ -8,6 +8,11 @@
                 <div class="card-header">Register</div>
 
                 <div class="card-body">
+                    <div class="fb-login">
+                        <a href="{{ url('/fb/login') }}"><img src="{{ URL::asset('storage/photo/fblogin.png') }}" width="40%"></a>
+                        <h3>OR</h3>
+                        <p>Fill the form</p>
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -15,7 +20,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', Session::get('name')) }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
@@ -29,7 +34,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email', Session::get('email')) }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">

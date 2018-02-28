@@ -51,6 +51,7 @@
                         <li><a href="{{ url('/addCategorie') }}">Add Categorie</a></li>
                         <li><a href="{{ url('formMovie') }}">Add Movie</a></li>
                         <li><a href="{{ url('/formActors') }}">Add Actor</a></li>
+                        <li><a href="{{ url('/logout') }}"><img src="{{ URL::asset('storage/photo/x.png') }}"></a></li>
                     </ul>
                     @endauth 
                     </ul>

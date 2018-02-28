@@ -46,3 +46,7 @@ Route::get('/deleteActor/{id}', 'ActorController@delete')->name('deleteActors');
 Route::post('/addActor', 'ActorController@add')->name('addActor');
 Route::get('/formActors', 'ActorController@form')->name('formActors');
 });
+
+
+Route::get('/fb/login', 'facebook@redirect')->name('facebook.login');
+Route::get('/fb/callback', 'facebook@callback')->name('facebook.callback');

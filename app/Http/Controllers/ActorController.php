@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Actor;
 use App\Movies;
+use App\Categories;
 use App\Http\Requests\Actors;
 use App\Http\Requests\StoreActor;
 use Auth;
@@ -26,11 +27,17 @@ class ActorController extends Controller
 			$movie_id = $request->input('movie_id');
 
 			$file = $request->file('photo');
-		    $path = $file->storePublicly('public/photo');
-		    $filename = basename($path);
 
 			$addActors = Actor::create(['name' => $name, 'bithday' => $birthday, 'deathday' => $deathday, 'user_id' => $user_id]);
-			$addActors->images()->create(['filename' => $filename, 'user_id' => $user_id]);
+
+		    foreach ($file as $oneFile) {
+	    	$path = $oneFile->storePublicly('public/photo');
+	    	$filename = basename($path);
+	    	$addActors->images()->create(['filename' => $filename, 'user_id' => $user_id]);
+	    	}
+
+			
+
         	if (isset($movie_id)) {		
         	$addActors->movies()->attach($movie_id);	
         	}
@@ -41,7 +48,9 @@ class ActorController extends Controller
 		public function display() {
 
 			$actors = Actor::get();
-			return view('actors.showActors', ['actors' => $actors]);
+			$movies = Movies::get();
+			$cats = Categories::get();
+			return view('actors.showActors', ['actors' => $actors, 'movies' => $movies, 'cats' => $cats]);
 
 		}
 

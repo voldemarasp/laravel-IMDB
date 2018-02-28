@@ -26,9 +26,6 @@ class MoviesController extends Controller
     	$user_id = Auth::User()->id;
 
     	$file = $request->file('photo');
-    	$path = $file->storePublicly('public/photo');
-    	$filename = basename($path);
-
 
     	$name = $request->input('name');
     	$category_id = $request->input('category_id');
@@ -40,8 +37,12 @@ class MoviesController extends Controller
 		$actor_id = $request->input('actor_id');
 
     	$moviesAdd = Movies::create(['name' => $name, 'category_id' => $category_id, 'user_id' => $user_id, 'year' => $year, 'description' => $description, 'rating' => $rating, 'date' => $date]);
-    	
+
+    	foreach ($file as $oneFile) {
+    	$path = $oneFile->storePublicly('public/photo');
+    	$filename = basename($path);
     	$moviesAdd->images()->create(['filename' => $filename, 'user_id' => $user_id]);
+    	}
 
     	if (isset($actor_id)) {
     	$moviesAdd->actors()->attach($actor_id);

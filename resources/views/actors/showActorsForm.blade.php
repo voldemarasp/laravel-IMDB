@@ -19,7 +19,7 @@
 	<input class="form-control mt-3" type="date" name="birthday" id="birthday" placeholder="Birth year">
 	<input class="form-control mt-3" type="date" name="deathday" id="deathday" placeholder="Death year">
 
-	<input multiple="multiple" class="form-control mt-3" type="file" name="photo" id="photo">
+	<input multiple="multiple" class="form-control mt-3" type="file" name="photo[]" id="photo">
 
 	<input class="form-control btn-success mt-3" type="submit" name="submit" value="Submit">
 </form>

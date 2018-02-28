@@ -9,6 +9,11 @@
                 <div class="card-header">Login</div>
 
                 <div class="card-body">
+                    <div class="fb-login">
+                        <a href="{{ url('/fb/login') }}"><img src="{{ URL::asset('storage/photo/fblogin.png') }}" width="40%"></a>
+                        <h3>OR</h3>
+                        <p>Fill the form</p>
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -16,7 +21,7 @@
                             <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="@if (!isset($useris->email)) {{ old('email') }} @else {{ $useris->email }} @endif" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback">

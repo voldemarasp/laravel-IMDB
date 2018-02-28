@@ -38,7 +38,7 @@
 
 @foreach ($actors->images as $image)
 
-<div class="col-4 movie-image-inside">
+<div class="col-4 movie-image-inside mt-3">
 <img class="shadow-images" src="{{ URL::asset('storage/photo/'.$image->filename) }}" height='200px' width='100%;'>
 </div>
 
