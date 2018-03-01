@@ -30,17 +30,21 @@ class ActorSeeder extends Seeder
 		$actorPath = 'https://api.themoviedb.org/3/person/'. $seedas['id'] .'?api_key=3d666046197bc35f402080e836eaaa66';
         $actorJson = json_decode(file_get_contents($actorPath), true);
 
-
+        if (empty($actorJson['birthday'])) {
+        	$birthday = '0000-00-00';
+        } else {
+        	$birthday = $actorJson['birthday'];
+        }
 
         if (empty($actorJson['deathday'])) {
-        	$deathday = $actorJson['birthday'];
+        	$deathday = '0000-00-00';
         } else {
         	$deathday = $actorJson['deathday'];
         }
 
         DB::table('actors')->insert([
     	'name' => $actorJson['name'],
-    	'bithday' => $actorJson['birthday'],
+    	'bithday' => $birthday,
     	'deathday' => $deathday,
     	'user_id' => '2',
     	'actor_api_id' => $seedas['id']

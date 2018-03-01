@@ -132,3 +132,32 @@ max-width:calc(33.33% - 60px) !important;
     object-fit: cover;
     height:75px;
 }
+
+.photoCheckas {
+    border:1px solid #044389;
+    padding:30px;
+}
+
+.photoCheckas input {
+    margin-right:10px;
+}
+
+.photoCheckasFeatured {
+    background-color: #78c0e0;
+}
+
+.photoCheckas:hover {
+   background-color: #78c0e0; 
+}
+
+label > input[type="radio"]{ /* HIDE RADIO */
+    visibility: hidden;
+  position: absolute; /* Remove input from document flow */
+}
+label > input[type="radio"] + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input[type="radio"]:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:2px solid #044389;
+}

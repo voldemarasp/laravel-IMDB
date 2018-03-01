@@ -48,9 +48,9 @@ class ActorController extends Controller
 
 		public function display() {
 			$images = Images::take(10)->get();
-			$actors = Actor::get();
-			$movies = Movies::get();
-			$cats = Categories::get();
+			$actors = Actor::paginate(9);
+			$movies = Movies::take(10)->get();
+			$cats = Categories::take(10)->get();
 			return view('actors.showActors', ['actors' => $actors, 'movies' => $movies, 'cats' => $cats, 'images' => $images]);
 
 		}

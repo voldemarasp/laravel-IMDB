@@ -17,7 +17,7 @@
 	<div class="movie-image">
 
 @if (isset($actor->images[0]->filename))
-<img src="{{ URL::asset('storage/photo/'.$actor->images[0]->filename) }}" width='100%';>
+<img src="{{ URL::asset('storage/photo/actors/'.$actor->images[0]->filename) }}" width='100%';>
 @else
 <img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
 @endif
@@ -56,6 +56,11 @@
 @endforeach
 </div>
 </div>
+</div>
+<div class="row">
+	<div class="col mt-5 d-flex justify-content-center">
+{{$actors->links()}}
+	</div>
 </div>
 </div>
 

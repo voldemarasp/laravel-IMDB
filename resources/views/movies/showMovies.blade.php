@@ -61,7 +61,7 @@
 </div>
 </div>
 <div class="row">
-	<div class="col mt-5">
+	<div class="col mt-5 d-flex justify-content-center">
 {{$movies->links()}}
 	</div>
 </div>
