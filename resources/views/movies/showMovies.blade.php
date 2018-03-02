@@ -15,12 +15,12 @@
 @foreach ($movies as $movie)
 <div class="col-4 mt-5 shadow mx-3 no-gutters">
 	<div class="movie-image">
+@foreach ($movie->images as $featImage)
 
-@if (isset($movie->images[0]->filename))
-<img src="{{ URL::asset('storage/photo/'.$movie->images[0]->filename) }}" width='100%';>
-@else
-<img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
+@if ($featImage->featured_image == 'yes')
+<img src="{{ URL::asset('storage/photo/'.$featImage->filename) }}" width='100%';>
 @endif
+@endforeach
 </div>
 
 <div class="pl-3 pt-3 pr-3">

@@ -39,9 +39,9 @@
 
 					@foreach ($movies->images as $image)
 					
-					@if($movies->images->first() == $image)
+					@if($image->featured_image == 'yes')
 					<div class="col-2 photoCheckas photoCheckasFeatured">
-						@else 
+						@else
 						<div class="col-2 photoCheckas">
 							@endif
 								<input type="checkbox" name="photoCheckas[]" value="{{ $image->id }}">
