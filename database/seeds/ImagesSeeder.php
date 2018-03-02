@@ -30,7 +30,6 @@ class ImagesSeeder extends Seeder
             $fullFileName = $filename .".". $ext;
 
             Storage::disk('local')->put('public/photo/actors/' . $fullFileName, $downloadImage);
-            $moviesAdd = Movies::findOrFail($actor->id);
 
 			$moviesAdd->images()->create(['filename' => $seedas['file_path'], 'user_id' => '2']);
 
