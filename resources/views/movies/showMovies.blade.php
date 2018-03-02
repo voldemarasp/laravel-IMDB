@@ -18,7 +18,7 @@
 @foreach ($movie->images as $featImage)
 
 @if ($featImage->featured_image == 'yes')
-<img src="{{ URL::asset('storage/photo/'.$featImage->filename) }}" width='100%';>
+<img src="{{ URL::asset('storage/photo/movies/'.$featImage->filename) }}" width='100%';>
 @php $hasFeaturedImage = 'yes'; @endphp
 @endif
 @endforeach
