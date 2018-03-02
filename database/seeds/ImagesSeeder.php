@@ -29,9 +29,15 @@ class ImagesSeeder extends Seeder
             $ext = pathinfo($getFullUrl, PATHINFO_EXTENSION);
             $fullFileName = $filename .".". $ext;
 
+            $if ($jsonImages['backdrops']->first() == $seedas) {
+                $featured_image = 'yes';
+            } else {
+                $featured_image = '';
+            }
+
             Storage::disk('local')->put('public/photo/movies/' . $fullFileName, $downloadImage);
 
-			$moviesAdd->images()->create(['filename' => $fullFileName, 'user_id' => '2', 'featured_image' => '']);
+			$moviesAdd->images()->create(['filename' => $fullFileName, 'user_id' => '2', 'featured_image' => $featured_image]);
 
             }
         }
