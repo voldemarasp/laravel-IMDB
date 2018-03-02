@@ -19,8 +19,12 @@
 
 @if ($featImage->featured_image == 'yes')
 <img src="{{ URL::asset('storage/photo/'.$featImage->filename) }}" width='100%';>
+@php $hasFeaturedImage = 'yes'; @endphp
 @endif
 @endforeach
+@if ($hasFeaturedImage != 'yes')
+<img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
+@endif
 </div>
 
 <div class="pl-3 pt-3 pr-3">
