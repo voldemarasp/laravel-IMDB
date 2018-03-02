@@ -35,7 +35,7 @@ class ImagesSeeder extends Seeder
 
 
 
-            $if ($count == 1) {
+            if ($count == 1) {
                 $featured_image = 'yes';
             } else {
                 $featured_image = '';
