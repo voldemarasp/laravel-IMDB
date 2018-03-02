@@ -22,7 +22,7 @@
 @php $hasFeaturedImage = 'yes'; @endphp
 @endif
 @endforeach
-@if ($hasFeaturedImage != 'yes')
+@if (!empty($hasFeaturedImage))
 <img src="{{ URL::asset('storage/photo/empty.jpg') }}" width='100%';>
 @endif
 </div>
