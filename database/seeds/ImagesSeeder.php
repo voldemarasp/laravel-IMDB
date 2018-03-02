@@ -31,7 +31,7 @@ class ImagesSeeder extends Seeder
 
             Storage::disk('local')->put('public/photo/movies/' . $fullFileName, $downloadImage);
 
-			$moviesAdd->images()->create(['filename' => $seedas['file_path'], 'user_id' => '2', 'featured_image' => '']);
+			$moviesAdd->images()->create(['filename' => $fullFileName, 'user_id' => '2', 'featured_image' => '']);
 
             }
         }
