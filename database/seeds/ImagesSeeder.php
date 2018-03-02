@@ -29,7 +29,7 @@ class ImagesSeeder extends Seeder
             $ext = pathinfo($getFullUrl, PATHINFO_EXTENSION);
             $fullFileName = $filename .".". $ext;
 
-            Storage::disk('local')->put('public/photo/actors/' . $fullFileName, $downloadImage);
+            Storage::disk('local')->put('public/photo/movies/' . $fullFileName, $downloadImage);
 
 			$moviesAdd->images()->create(['filename' => $seedas['file_path'], 'user_id' => '2', 'featured_image' => '']);
 
